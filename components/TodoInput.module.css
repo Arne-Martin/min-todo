@@ -1,0 +1,42 @@
+/* TodoInput: en rad med textfält och plus-knapp. */
+
+.form {
+  display: flex;
+  gap: var(--gap);
+  align-items: stretch;
+}
+
+.input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.addButton {
+  flex: 0 0 auto;
+  width: var(--tap);
+  height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.addButton:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+/* Visuellt dolt men fortfarande tillgängligt för skärmläsare. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
