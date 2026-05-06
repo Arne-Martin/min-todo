@@ -1,0 +1,21 @@
+/* FilterBar: en rad med tre knappar. */
+
+.bar {
+  display: flex;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.button {
+  flex: 1 1 auto;
+  min-height: var(--tap);
+  padding: 0.5rem 0.75rem;
+}
+
+/* Aktivt filter: kraftig bakgrund med kontrasterande text. Säkerställer WCAG AA. */
+.active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+  font-weight: 600;
+}

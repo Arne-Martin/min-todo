@@ -1,0 +1,61 @@
+/* TodoItem: layout för en enskild rad. */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  min-height: var(--tap);
+}
+
+.checkbox {
+  /* Förstora native-checkboxen så klickytan blir bekväm på touch. */
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+  /* Säkerställ att en kombinerad träffyta runt checkbox + label är stor nog
+     – label sträcker sig över resten av raden, vilket ger ≥ 44 × 44 px. */
+  margin: 0;
+}
+
+.label {
+  flex: 1 1 auto;
+  word-break: break-word;
+  cursor: pointer;
+  /* Hela label-ytan ska vara klickbar för att toggla checkboxen. */
+  padding: 0.5rem 0;
+  min-height: var(--tap);
+  display: flex;
+  align-items: center;
+}
+
+/* När uppgiften är klar: överstruken text och dämpad färg.
+   Endast textens utseende ändras – positionen i listan är oförändrad
+   (beslutad i Clarifications 2026-05-05). */
+.done {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+/* Papperskorg-knappen: minimal genomskinlig knapp, ikon i dämpad färg
+   som blir tydligare vid hover/focus. */
+.removeButton {
+  flex: 0 0 auto;
+  width: var(--tap);
+  height: var(--tap);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+}
+
+.removeButton:hover,
+.removeButton:focus-visible {
+  color: var(--danger);
+  border-color: var(--border);
+}

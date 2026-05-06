@@ -1,0 +1,42 @@
+/* Sidlayout: en centrerad kolumn med max-bredd 600 px. */
+
+.main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.warning {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  background: #fef3c7;
+  color: #78350f;
+  font-size: 0.95rem;
+}
+
+.counter {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.clearButton {
+  align-self: flex-start;
+  color: var(--muted);
+}
+
+.clearButton:hover:not(:disabled),
+.clearButton:focus-visible {
+  color: var(--danger);
+  border-color: var(--danger);
+}
