@@ -1,0 +1,24 @@
+/* Knappens klickyta är minst 44 × 44 px (FR-006) — uppfylls av min-width
+ * och min-height i kombination med padding 0 (annars kan ikonen hamna ur
+ * mitten). Bakgrund är transparent så knappen smälter in i headern;
+ * border + var(--border) ger en subtil avgränsning. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--tap);
+  min-height: var(--tap);
+  padding: 0;
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+/* En lätt hover-yta så det syns att knappen är klickbar.
+ * --border är en dämpad nyans i båda teman och ger en subtil tint
+ * mot den genomskinliga ytan. */
+.button:hover {
+  background: var(--border);
+}

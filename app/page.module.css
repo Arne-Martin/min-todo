@@ -9,6 +9,15 @@
   gap: 1rem;
 }
 
+/* Headerrad: rubrik vänster, toggleknapp höger. Mobilvänlig vid 320 px:
+ * "Mina uppgifter" + 44 × 44 px-knapp + 1 rem gap ≈ 190 px ≪ 320 px. */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
 .title {
   margin: 0;
   font-size: 1.75rem;

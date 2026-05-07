@@ -7,6 +7,7 @@
 import { useState } from "react";
 
 import { FilterBar } from "@/components/FilterBar";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { TodoInput } from "@/components/TodoInput";
 import { TodoList } from "@/components/TodoList";
 import { useTodos } from "@/hooks/useTodos";
@@ -54,7 +55,10 @@ export default function Page() {
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.title}>Mina uppgifter</h1>
+      <header className={styles.header}>
+        <h1 className={styles.title}>Mina uppgifter</h1>
+        <ThemeToggle />
+      </header>
 
       {storageWarning === "unavailable" && (
         <p role="status" className={styles.warning}>

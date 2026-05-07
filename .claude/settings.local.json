@@ -6,7 +6,9 @@
       "Bash(git -C C:/projects/min-todo log --oneline -5)",
       "Bash(git -C C:/projects/min-todo add .specify/memory/constitution.md)",
       "Bash(git -C C:/projects/min-todo commit -m ' *)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)"
     ]
   }
 }
