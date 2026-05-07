@@ -18,6 +18,7 @@ body {
 }
 
 /* Designtokens: en plats för färger och spacing så det är enkelt att justera. */
+/* :root definierar ljust tema (default). Mörkt tema overridar färger nedan. */
 :root {
   --bg: #ffffff;
   --fg: #1a1a1a;
@@ -29,6 +30,57 @@ body {
   --gap: 0.75rem;
   --radius: 0.5rem;
   --tap: 44px;
+}
+
+/*
+ * Mörkt tema. Aktiveras när <html data-theme="dark"> är satt — antingen av
+ * inline-scriptet i app/layout.tsx (innan React hydrerar) eller av useTheme-
+ * hooken efter ett klick. Endast färgvariabler ändras; layout-tokens (gap,
+ * radius, tap) är samma i båda teman per spec FR-015. Värdena är dämpade
+ * (off-black bg, off-white fg) per spec FR-013 — inga rena svart/vita
+ * kontraster.
+ *
+ * Kontrast i mörkt tema (analytiskt verifierat 2026-05-08 mot WCAG-formeln):
+ *   fg/bg         #e8e8eb / #1a1b1f ≈ 14.1:1 ✅ AAA
+ *   muted/bg      #9097a0 / #1a1b1f ≈  5.9:1 ✅ AA
+ *   accent/bg     #6b9aff / #1a1b1f ≈  6.3:1 ✅ AA (UI ≥ 3:1)
+ *   accent-fg/accent  #0a0a0c / #6b9aff ≈ 7.2:1 ✅ AA
+ *   danger/bg     #ef6b6b / #1a1b1f ≈  5.7:1 ✅ AA
+ * Ljust tema klarar samma trösklar (≥5.2:1 för alla kritiska par).
+ */
+[data-theme="dark"] {
+  --bg: #1a1b1f;
+  --fg: #e8e8eb;
+  --muted: #9097a0;
+  --accent: #6b9aff;
+  --accent-fg: #0a0a0c;
+  --border: #34353a;
+  --danger: #ef6b6b;
+}
+
+/*
+ * Mjuk färgövergång vid temabyte. 200 ms på alla färgbärande egenskaper
+ * (FR-007). Vi listar egenskaperna explicit istället för `transition: all`
+ * för att INTE animera layout-egenskaper — layouten ska vara identisk
+ * mellan teman (FR-015).
+ */
+*,
+*::before,
+*::after {
+  transition:
+    background-color 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease,
+    fill 200ms ease;
+}
+
+/* Användare som föredrar reducerad rörelse får instant byte (FR-008). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0ms;
+  }
 }
 
 body {

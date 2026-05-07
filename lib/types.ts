@@ -35,3 +35,14 @@ export type LoadResult =
   | { ok: true; tasks: Task[]; storageDisabled: false; corrupted: false }
   | { ok: true; tasks: []; storageDisabled: true; corrupted: false }
   | { ok: true; tasks: []; storageDisabled: false; corrupted: true };
+
+// Tematyper – se specs/002-dark-mode-toggle/data-model.md.
+
+/**
+ * Användarens val. `null` = inget val gjort, följ system.
+ * Endast `'light'` och `'dark'` sparas i localStorage.
+ */
+export type ThemeChoice = "light" | "dark" | null;
+
+/** Det effektivt aktiva temat. Alltid en av två konkreta värden. */
+export type ThemeMode = "light" | "dark";
