@@ -17,64 +17,74 @@ body {
   padding: 0;
 }
 
-/* Designtokens: en plats för färger och spacing så det är enkelt att justera. */
-/* :root definierar ljust tema (default). Mörkt tema overridar färger nedan. */
+/*
+ * Designtokens — :root definierar ljust tema (default). Mörkt tema
+ * overridar färger nedan. Strukturella tokens (radius, tap) är samma i
+ * båda teman.
+ *
+ * Värden hämtas direkt från konstitutionens designsystem (v1.1.0):
+ * Designspråk > Färgpalett, Hörn. Kontrast WCAG AA-verifierad i båda
+ * teman; se kontrast-anteckningen ovanför [data-theme="dark"].
+ */
 :root {
-  --bg: #ffffff;
+  --bg: #fafaf7;
   --fg: #1a1a1a;
   --muted: #6b6b6b;
-  --accent: #2563eb;
+  --accent: #cc7c5e;
   --accent-fg: #ffffff;
   --border: #d4d4d4;
-  --danger: #b91c1c;
-  --gap: 0.75rem;
-  --radius: 0.5rem;
+  --danger: #c62828;
+  --ok: #2e7d32;
+  /* Hörn-radius — 6 px för knappar, 8 px för inputs/kort */
+  --radius-button: 6px;
+  --radius-card: 8px;
   --tap: 44px;
 }
 
 /*
  * Mörkt tema. Aktiveras när <html data-theme="dark"> är satt — antingen av
  * inline-scriptet i app/layout.tsx (innan React hydrerar) eller av useTheme-
- * hooken efter ett klick. Endast färgvariabler ändras; layout-tokens (gap,
- * radius, tap) är samma i båda teman per spec FR-015. Värdena är dämpade
- * (off-black bg, off-white fg) per spec FR-013 — inga rena svart/vita
- * kontraster.
+ * hooken efter ett klick. Endast färgvariabler ändras; layout-tokens är
+ * samma i båda teman per spec FR-015.
  *
- * Kontrast i mörkt tema (analytiskt verifierat 2026-05-08 mot WCAG-formeln):
- *   fg/bg         #e8e8eb / #1a1b1f ≈ 14.1:1 ✅ AAA
- *   muted/bg      #9097a0 / #1a1b1f ≈  5.9:1 ✅ AA
- *   accent/bg     #6b9aff / #1a1b1f ≈  6.3:1 ✅ AA (UI ≥ 3:1)
- *   accent-fg/accent  #0a0a0c / #6b9aff ≈ 7.2:1 ✅ AA
- *   danger/bg     #ef6b6b / #1a1b1f ≈  5.7:1 ✅ AA
- * Ljust tema klarar samma trösklar (≥5.2:1 för alla kritiska par).
+ * Kontrast i mörkt tema (analytiskt beräknat 2026-05-08 mot WCAG-formeln;
+ * verifieras praktiskt i T020):
+ *   fg/bg              #f0f0f0 / #1a1a1a ≈ 14.4:1 ✅ AAA
+ *   muted/bg           #999999 / #1a1a1a ≈  6.4:1 ✅ AA
+ *   accent/bg          #e89678 / #1a1a1a ≈  7.5:1 ✅ AA
+ *   accent-fg/accent   #1a1a1a / #e89678 ≈  5.7:1 ✅ AA
+ *   danger/bg          #ef6b6b / #1a1a1a ≈  5.7:1 ✅ AA
+ *   ok/bg              #7fc987 / #1a1a1a ≈  6.2:1 ✅ AA
+ * Ljust tema klarar samma trösklar (≥ 4.7:1 för alla kritiska par).
  */
 [data-theme="dark"] {
-  --bg: #1a1b1f;
-  --fg: #e8e8eb;
-  --muted: #9097a0;
-  --accent: #6b9aff;
-  --accent-fg: #0a0a0c;
+  --bg: #1a1a1a;
+  --fg: #f0f0f0;
+  --muted: #999999;
+  --accent: #e89678;
+  --accent-fg: #1a1a1a;
   --border: #34353a;
   --danger: #ef6b6b;
+  --ok: #7fc987;
 }
 
 /*
- * Mjuk färgövergång vid temabyte. 200 ms på alla färgbärande egenskaper
- * (FR-007). Vi listar egenskaperna explicit istället för `transition: all`
- * för att INTE animera layout-egenskaper — layouten ska vara identisk
- * mellan teman (FR-015).
+ * Mjuk färgövergång vid temabyte. 200 ms ease-out på alla färgbärande
+ * egenskaper (Designspråk > Animationer). Vi listar egenskaperna explicit
+ * istället för `transition: all` för att INTE animera layout-egenskaper —
+ * layouten ska vara identisk mellan teman.
  */
 *,
 *::before,
 *::after {
   transition:
-    background-color 200ms ease,
-    color 200ms ease,
-    border-color 200ms ease,
-    fill 200ms ease;
+    background-color 200ms ease-out,
+    color 200ms ease-out,
+    border-color 200ms ease-out,
+    fill 200ms ease-out;
 }
 
-/* Användare som föredrar reducerad rörelse får instant byte (FR-008). */
+/* Användare som föredrar reducerad rörelse får instant byte. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -107,9 +117,9 @@ button {
   color: inherit;
   background: none;
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-button);
   cursor: pointer;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 1rem;
   min-height: var(--tap);
 }
 
@@ -123,7 +133,7 @@ input[type="text"] {
   color: inherit;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-card);
+  padding: 0.5rem 1rem;
   min-height: var(--tap);
 }

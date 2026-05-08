@@ -17,7 +17,15 @@ type Props = {
 
 export function TodoList({ tasks, onToggle, onRemove, emptyMessage }: Props) {
   if (tasks.length === 0) {
-    return <p className={styles.empty}>{emptyMessage}</p>;
+    // ☐-symbolen är dekorativ — aria-hidden så skärmläsare bara läser texten.
+    return (
+      <p className={styles.empty}>
+        <span aria-hidden="true" className={styles.emptyIcon}>
+          ☐
+        </span>
+        {emptyMessage}
+      </p>
+    );
   }
 
   return (
