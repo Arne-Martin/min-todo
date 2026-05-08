@@ -2,20 +2,33 @@
 
 .bar {
   display: flex;
-  gap: var(--gap);
+  gap: 1rem;
   flex-wrap: wrap;
 }
 
+/*
+ * Filter-knappar har en transparent bottenkant som ersätts av accentfärgens
+ * understreckning på den aktiva — höjden förblir konstant så listan inte
+ * hoppar när användaren byter filter.
+ */
 .button {
   flex: 1 1 auto;
   min-height: var(--tap);
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-button);
+  border-bottom: 2px solid transparent;
+  transition:
+    background-color 200ms ease-out,
+    border-color 200ms ease-out,
+    color 200ms ease-out;
 }
 
-/* Aktivt filter: kraftig bakgrund med kontrasterande text. Säkerställer WCAG AA. */
+.button:hover:not(.active) {
+  background: var(--border);
+}
+
+/* Aktivt filter: understreckning i accentfärg (Q4 i specens Clarifications). */
 .active {
-  background: var(--fg);
-  color: var(--bg);
-  border-color: var(--fg);
+  border-bottom-color: var(--accent);
   font-weight: 600;
 }

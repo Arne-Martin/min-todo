@@ -24,12 +24,19 @@
   font-weight: 600;
 }
 
+/*
+ * Warning-banner: neutral, tema-aware look. Bakgrunden använder color-mix
+ * för att blanda in en svag accent-tonad nyans i :root-bakgrunden — ger en
+ * mjuk "obs"-yta som anpassar sig till båda teman utan separata variabler.
+ * Vänster-bordern markerar bannerns notis-natur utan att överdramatisera.
+ */
 .warning {
   margin: 0;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--radius);
-  background: #fef3c7;
-  color: #78350f;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-card);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg));
+  color: var(--fg);
+  border-left: 3px solid var(--accent);
   font-size: 0.95rem;
 }
 
@@ -42,6 +49,12 @@
 .clearButton {
   align-self: flex-start;
   color: var(--muted);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-button);
+  transition:
+    color 200ms ease-out,
+    border-color 200ms ease-out,
+    background-color 200ms ease-out;
 }
 
 .clearButton:hover:not(:disabled),

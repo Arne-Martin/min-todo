@@ -1,9 +1,13 @@
 /* TodoList: en avskalad <ul> utan punkter. */
 
+/* 24 px (1.5rem) vertikal luft mellan listobjekt — FR-007. */
 .list {
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .empty {
@@ -11,5 +15,15 @@
   font-style: italic;
   padding: 1rem 0;
   margin: 0;
-  text-align: center;
+  text-align: left;
+}
+
+/* ☐-symbol vid tom-tillstånd. Ärver textens muted-färg via cascade.
+ * font-style: normal så symbolen inte lutar trots att .empty är kursiv. */
+.emptyIcon {
+  display: inline-block;
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+  vertical-align: middle;
+  font-style: normal;
 }
